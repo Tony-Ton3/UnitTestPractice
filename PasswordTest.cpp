@@ -5,22 +5,102 @@
 #include <gtest/gtest.h>
 #include "Password.h"
 
-class PracticeTest : public ::testing::Test
-{
+class PasswordTest : public ::testing::Test {
 	protected:
-		PracticeTest(){} //constructor runs before each test
-		virtual ~PracticeTest(){} //destructor cleans up after tests
+		PasswordTest(){} //constructor runs before each test
+		virtual ~PasswordTest(){} //destructor cleans up after tests
 		virtual void SetUp(){} //sets up before each test (after constructor)
 		virtual void TearDown(){} //clean up after each test, (before destructor)
 };
 
-TEST(PasswordTest, smoke_test)
-{
+TEST(PasswordTest, smoke_test) {
     ASSERT_TRUE( 1 == 1 );
 }
-TEST(PasswordTest, single_letter_password)
-{
+
+// TESTS FOR count_leading_characters
+
+TEST(PasswordTest, single_letter_password) {
     Password my_password;
 	int actual = my_password.count_leading_characters("Z");
 	ASSERT_EQ(1,actual);
+}
+
+TEST(PasswordTest, letters_repeated_at_end) {
+	Password my_password;
+	int actual = my_password.count_leading_characters("Zoo");
+	ASSERT_EQ(1, actual);
+}
+
+TEST(PasswordTest, uppercase_lowercase_password) {
+	Password my_password;
+	int actual = my_password.count_leading_characters("ZZzz");
+	ASSERT_EQ(2, actual);
+}
+
+TEST(PasswordTest, number_password) {
+	Password my_password;
+	int actual = my_password.count_leading_characters("00000001");
+	ASSERT_EQ(7, actual);
+}
+
+TEST(PasswordTest, empty_password) {
+	Password my_password;
+	int actual = my_password.count_leading_characters("");
+	ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, diff_langauge_letters) {
+	Password my_password;
+	int actual = my_password.count_leading_characters("оoooooooooo");
+	ASSERT_EQ(1, actual);
+}
+
+TEST(PasswordTest, repeating_spaces) {
+	Password my_password;
+	int actual = my_password.count_leading_characters("     ");
+	ASSERT_EQ(5, actual);
+}
+
+TEST(PasswordTest, repeating_special_characters) {
+	Password my_password;
+	int actual = my_password.count_leading_characters("&&&&&");
+	ASSERT_EQ(5, actual);
+}
+
+// TESTS FOR has_mixed_case
+
+TEST(PasswordTest, empty_case){
+	Password my_password;
+	bool result = my_password.has_mixed_case("");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, one_letter) {
+	Password my_password;
+	bool result = my_password.has_mixed_case("A");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, only_lowercase){
+	Password my_password;
+	bool result = my_password.has_mixed_case("aaaaa");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, only_uppercase){
+	Password my_password;
+	bool result = my_password.has_mixed_case("AAAA");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, both_upper_lower) {
+	Password my_password;
+	bool result = my_password.has_mixed_case("Aa");
+	ASSERT_EQ(true, result);
+}
+
+TEST(PasswordTest, special_characters) {
+	Password my_password;
+	bool result = my_password.has_mixed_case("A&&&");
+	ASSERT_EQ(false, result);
 }
