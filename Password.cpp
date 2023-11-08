@@ -1,5 +1,8 @@
 #include "Password.h"
 #include <string>
+#include <locale>
+#include <cctype>
+#include <cwctype>
 
 using std::string;
 
@@ -30,6 +33,7 @@ bool Password::has_mixed_case(string phrase) {
   for(int i = 0; i < phrase.length(); i++) {
     if(std::islower(phrase[i])) hasLowercase = true;
     if(std::isupper(phrase[i])) hasUppercase = true;
+    if (hasUppercase && hasLowercase) break;
   }
   return hasUppercase && hasLowercase;
 }

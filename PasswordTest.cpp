@@ -84,7 +84,7 @@ TEST(PasswordTest, one_letter) {
 TEST(PasswordTest, only_lowercase){
 	Password my_password;
 	bool result = my_password.has_mixed_case("aaaaa");
-	ASSERT_EQ(false, result);
+	ASSERT_NE(true, result);
 }
 
 TEST(PasswordTest, only_uppercase){
@@ -95,12 +95,30 @@ TEST(PasswordTest, only_uppercase){
 
 TEST(PasswordTest, both_upper_lower) {
 	Password my_password;
-	bool result = my_password.has_mixed_case("Aa");
+	bool result = my_password.has_mixed_case("Az");
 	ASSERT_EQ(true, result);
 }
 
 TEST(PasswordTest, special_characters) {
 	Password my_password;
 	bool result = my_password.has_mixed_case("A&&&");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, upper_lower_special_characters) {
+	Password my_password;
+	bool result = my_password.has_mixed_case("12\nA&&&zyyyAlllmmm;;\n\0");
+	ASSERT_EQ(true, result);
+}
+
+TEST(PasswordTest, numbers) {
+	Password my_password;
+	bool result = my_password.has_mixed_case("12321312");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, null_character) {
+	Password my_password;
+	bool result = my_password.has_mixed_case("\0");
 	ASSERT_EQ(false, result);
 }
