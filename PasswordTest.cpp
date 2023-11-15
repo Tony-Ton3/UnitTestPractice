@@ -163,6 +163,28 @@ TEST(PasswordTest, SA_invalid_leading_password) {
 TEST(PasswordTest, SA_invalid_mixed_case_password) {
 	Password my_password;
 	my_password.set("notmixedcase");
-	bool result = my_password.authenticate("notmixedcase");
+	bool result = my_password.authenticate("notcorrect");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, SA_invalid_another_mixed_case_password) {
+	Password my_password;
+	my_password.set("notmixedcase");
+	bool result = my_password.authenticate("NOTCORRECT");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, SA_empty_password) {
+	Password my_password;
+	my_password.set("correctPassword");
+	bool result = my_password.authenticate("");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, SA_previously_used_password) {
+	Password my_password;
+	my_password.set("correctPassword");
+	my_password.set("ChicoCA-95929");
+	bool result = my_password.authenticate("ChicoCA-95929");
 	ASSERT_EQ(false, result);
 }

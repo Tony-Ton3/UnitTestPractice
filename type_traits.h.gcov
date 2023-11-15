@@ -153,8 +153,8 @@
         -:  149:  // For use in string and vstring.
         -:  150:  template<typename _Type>
         -:  151:    inline bool
-     195*:  152:    __is_null_pointer(_Type* __ptr)
-     195*:  153:    { return __ptr == 0; }
+     220*:  152:    __is_null_pointer(_Type* __ptr)
+     220*:  153:    { return __ptr == 0; }
 ------------------
 _ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
 function _ZN9__gnu_cxx17__is_null_pointerIcEEbPT_ called 0 returned 0% blocks executed 0%
@@ -162,9 +162,9 @@ function _ZN9__gnu_cxx17__is_null_pointerIcEEbPT_ called 0 returned 0% blocks ex
     #####:  153:    { return __ptr == 0; }
 ------------------
 _ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
-function _ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_ called 195 returned 100% blocks executed 100%
-      195:  152:    __is_null_pointer(_Type* __ptr)
-      195:  153:    { return __ptr == 0; }
+function _ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_ called 220 returned 100% blocks executed 100%
+      220:  152:    __is_null_pointer(_Type* __ptr)
+      220:  153:    { return __ptr == 0; }
 ------------------
         -:  154:
         -:  155:  template<typename _Type>

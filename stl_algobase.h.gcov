@@ -231,17 +231,17 @@
         -:  227:  template<typename _Tp>
         -:  228:    _GLIBCXX14_CONSTEXPR
         -:  229:    inline const _Tp&
-function _ZSt3minImERKT_S2_S2_ called 97 returned 100% blocks executed 75%
-       97:  230:    min(const _Tp& __a, const _Tp& __b)
+function _ZSt3minImERKT_S2_S2_ called 107 returned 100% blocks executed 75%
+      107:  230:    min(const _Tp& __a, const _Tp& __b)
         -:  231:    {
         -:  232:      // concept requirements
         -:  233:      __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
         -:  234:      //return __b < __a ? __b : __a;
-       97:  235:      if (__b < __a)
+      107:  235:      if (__b < __a)
 branch  0 taken 0 (fallthrough)
-branch  1 taken 97
+branch  1 taken 107
     #####:  236:	return __b;
-       97:  237:      return __a;
+      107:  237:      return __a;
         -:  238:    }
         -:  239:
         -:  240:  /**
@@ -258,17 +258,17 @@ branch  1 taken 97
         -:  251:  template<typename _Tp>
         -:  252:    _GLIBCXX14_CONSTEXPR
         -:  253:    inline const _Tp&
-function _ZSt3maxImERKT_S2_S2_ called 47 returned 100% blocks executed 100%
-       47:  254:    max(const _Tp& __a, const _Tp& __b)
+function _ZSt3maxImERKT_S2_S2_ called 52 returned 100% blocks executed 100%
+       52:  254:    max(const _Tp& __a, const _Tp& __b)
         -:  255:    {
         -:  256:      // concept requirements
         -:  257:      __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
         -:  258:      //return  __a < __b ? __b : __a;
-       47:  259:      if (__a < __b)
-branch  0 taken 33 (fallthrough)
-branch  1 taken 14
-       33:  260:	return __b;
-       14:  261:      return __a;
+       52:  259:      if (__a < __b)
+branch  0 taken 36 (fallthrough)
+branch  1 taken 16
+       36:  260:	return __b;
+       16:  261:      return __a;
         -:  262:    }
         -:  263:
         -:  264:  /**
@@ -320,10 +320,10 @@ branch  1 taken 14
         -:  310:  template<typename _Iterator>
         -:  311:    _GLIBCXX20_CONSTEXPR
         -:  312:    inline _Iterator
-function _ZSt12__niter_baseIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEET_S7_ called 201 returned 100% blocks executed 100%
-      201:  313:    __niter_base(_Iterator __it)
+function _ZSt12__niter_baseIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEET_S7_ called 231 returned 100% blocks executed 100%
+      231:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-      201:  315:    { return __it; }
+      231:  315:    { return __it; }
         -:  316:
         -:  317:  template<typename _Ite, typename _Seq>
         -:  318:    _Ite

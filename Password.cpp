@@ -3,6 +3,7 @@
 #include <locale>
 #include <cctype>
 #include <cwctype>
+#include <iostream>
 
 using std::string;
 
@@ -37,7 +38,6 @@ bool Password::has_mixed_case(string phrase) {
   for(int i = 0; i < phrase.length(); i++) {
     if(std::islower(phrase[i])) hasLowercase = true;
     if(std::isupper(phrase[i])) hasUppercase = true;
-    if (hasUppercase && hasLowercase) break;
   }
   return hasUppercase && hasLowercase;
 }
@@ -78,6 +78,6 @@ void Password::set(string phrase) {
   or if a password has not been set.
 */
 bool Password::authenticate(string phrase) {
-  if (pass_history.size() == 0) return false;
+  if (phrase.length() == 0) return false;
   return pass_history[pass_history.size() - 1 ] == phrase ? true : false;
 }

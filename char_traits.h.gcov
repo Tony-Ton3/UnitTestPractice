@@ -296,7 +296,7 @@ branch  2 never executed
         -:  287:#ifdef _GLIBCXX_HAVE_BUILTIN_IS_CONSTANT_EVALUATED
         -:  288:      (void) __s;
         -:  289:      // In constexpr contexts all strings should be constant.
-      189:  290:      return __builtin_is_constant_evaluated();
+      214:  290:      return __builtin_is_constant_evaluated();
         -:  291:#else
         -:  292:      while (__builtin_constant_p(*__s) && *__s)
         -:  293:	__s++;
@@ -379,19 +379,19 @@ function _ZNSt11char_traitsIcE2ltERKcS2_ called 0 returned 0% blocks executed 0%
         -:  369:      }
         -:  370:
         -:  371:      static _GLIBCXX17_CONSTEXPR int
-function _ZNSt11char_traitsIcE7compareEPKcS2_m called 2 returned 100% blocks executed 27%
-        2:  372:      compare(const char_type* __s1, const char_type* __s2, size_t __n)
+function _ZNSt11char_traitsIcE7compareEPKcS2_m called 3 returned 100% blocks executed 27%
+        3:  372:      compare(const char_type* __s1, const char_type* __s2, size_t __n)
         -:  373:      {
-        2:  374:	if (__n == 0)
+        3:  374:	if (__n == 0)
 branch  0 taken 0 (fallthrough)
-branch  1 taken 2
+branch  1 taken 3
     #####:  375:	  return 0;
         -:  376:#if __cplusplus >= 201703L
-        2:  377:	if (__builtin_constant_p(__n)
+        3:  377:	if (__builtin_constant_p(__n)
         -:  378:	    && __constant_char_array_p(__s1, __n)
-        2:  379:	    && __constant_char_array_p(__s2, __n))
+        3:  379:	    && __constant_char_array_p(__s2, __n))
 branch  0 taken 0 (fallthrough)
-branch  1 taken 2
+branch  1 taken 3
         -:  380:	  {
     #####:  381:	    for (size_t __i = 0; __i < __n; ++__i)
 branch  0 never executed
@@ -409,21 +409,21 @@ branch  2 never executed
     #####:  386:	    return 0;
         -:  387:	  }
         -:  388:#endif
-        2:  389:	return __builtin_memcmp(__s1, __s2, __n);
+        3:  389:	return __builtin_memcmp(__s1, __s2, __n);
         -:  390:      }
         -:  391:
         -:  392:      static _GLIBCXX17_CONSTEXPR size_t
-function _ZNSt11char_traitsIcE6lengthEPKc called 189 returned 100% blocks executed 71%
-      189:  393:      length(const char_type* __s)
+function _ZNSt11char_traitsIcE6lengthEPKc called 214 returned 100% blocks executed 71%
+      214:  393:      length(const char_type* __s)
         -:  394:      {
         -:  395:#if __cplusplus >= 201703L
-      189:  396:	if (__constant_string_p(__s))
+      214:  396:	if (__constant_string_p(__s))
 branch  0 taken 0 (fallthrough)
-branch  1 taken 189
+branch  1 taken 214
     #####:  397:	  return __gnu_cxx::char_traits<char_type>::length(__s);
 call    0 never executed
         -:  398:#endif
-      189:  399:	return __builtin_strlen(__s);
+      214:  399:	return __builtin_strlen(__s);
         -:  400:      }
         -:  401:
         -:  402:      static _GLIBCXX17_CONSTEXPR const char_type*
