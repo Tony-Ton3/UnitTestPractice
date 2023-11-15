@@ -19,49 +19,49 @@ TEST(PasswordTest, smoke_test) {
 
 // TESTS FOR count_leading_characters
 
-TEST(PasswordTest, single_letter_password) {
+TEST(PasswordTest, CLC_single_letter_password) {
     Password my_password;
 	int actual = my_password.count_leading_characters("Z");
 	ASSERT_EQ(1,actual);
 }
 
-TEST(PasswordTest, letters_repeated_at_end) {
+TEST(PasswordTest, CLC_letters_repeated_at_end) {
 	Password my_password;
 	int actual = my_password.count_leading_characters("Zoo");
 	ASSERT_EQ(1, actual);
 }
 
-TEST(PasswordTest, uppercase_lowercase_password) {
+TEST(PasswordTest, CLC_uppercase_lowercase_password) {
 	Password my_password;
 	int actual = my_password.count_leading_characters("ZZzz");
 	ASSERT_EQ(2, actual);
 }
 
-TEST(PasswordTest, number_password) {
+TEST(PasswordTest, CLC_number_password) {
 	Password my_password;
 	int actual = my_password.count_leading_characters("00000001");
 	ASSERT_EQ(7, actual);
 }
 
-TEST(PasswordTest, empty_password) {
+TEST(PasswordTest, CLC_empty_password) {
 	Password my_password;
 	int actual = my_password.count_leading_characters("");
 	ASSERT_EQ(0, actual);
 }
 
-TEST(PasswordTest, diff_langauge_letters) {
+TEST(PasswordTest, CLC_diff_langauge_letters) {
 	Password my_password;
 	int actual = my_password.count_leading_characters("оoooooooooo");
 	ASSERT_EQ(1, actual);
 }
 
-TEST(PasswordTest, repeating_spaces) {
+TEST(PasswordTest, CLC_repeating_spaces) {
 	Password my_password;
 	int actual = my_password.count_leading_characters("     ");
 	ASSERT_EQ(5, actual);
 }
 
-TEST(PasswordTest, repeating_special_characters) {
+TEST(PasswordTest, CLC_repeating_special_characters) {
 	Password my_password;
 	int actual = my_password.count_leading_characters("&&&&&");
 	ASSERT_EQ(5, actual);
@@ -69,56 +69,100 @@ TEST(PasswordTest, repeating_special_characters) {
 
 // TESTS FOR has_mixed_case
 
-TEST(PasswordTest, empty_case){
+TEST(PasswordTest, HMC_empty_case){
 	Password my_password;
 	bool result = my_password.has_mixed_case("");
 	ASSERT_EQ(false, result);
 }
 
-TEST(PasswordTest, one_letter) {
+TEST(PasswordTest, HMC_one_letter) {
 	Password my_password;
 	bool result = my_password.has_mixed_case("A");
 	ASSERT_EQ(false, result);
 }
 
-TEST(PasswordTest, only_lowercase){
+TEST(PasswordTest, HMC_only_lowercase){
 	Password my_password;
 	bool result = my_password.has_mixed_case("aaaaa");
 	ASSERT_NE(true, result);
 }
 
-TEST(PasswordTest, only_uppercase){
+TEST(PasswordTest, HMC_only_uppercase){
 	Password my_password;
 	bool result = my_password.has_mixed_case("AAAA");
 	ASSERT_EQ(false, result);
 }
 
-TEST(PasswordTest, both_upper_lower) {
+TEST(PasswordTest, HMC_both_upper_lower) {
 	Password my_password;
 	bool result = my_password.has_mixed_case("Az");
 	ASSERT_EQ(true, result);
 }
 
-TEST(PasswordTest, special_characters) {
+TEST(PasswordTest, HMC_special_characters) {
 	Password my_password;
 	bool result = my_password.has_mixed_case("A&&&");
 	ASSERT_EQ(false, result);
 }
 
-TEST(PasswordTest, upper_lower_special_characters) {
+TEST(PasswordTest, HMC_upper_lower_special_characters) {
 	Password my_password;
 	bool result = my_password.has_mixed_case("12\nA&&&zyyyAlllmmm;;\n\0");
 	ASSERT_EQ(true, result);
 }
 
-TEST(PasswordTest, numbers) {
+TEST(PasswordTest, HMC_numbers) {
 	Password my_password;
 	bool result = my_password.has_mixed_case("12321312");
 	ASSERT_EQ(false, result);
 }
 
-TEST(PasswordTest, null_character) {
+TEST(PasswordTest, HMC_null_character) {
 	Password my_password;
 	bool result = my_password.has_mixed_case("\0");
+	ASSERT_EQ(false, result);
+}
+
+// TESTS FOR SET & AUTHENICATE
+
+TEST(PasswordTest, SA_correct_password) {
+	Password my_password;
+	my_password.set("correctPassword");
+	bool result = my_password.authenticate("correctPassword");
+	ASSERT_EQ(true, result);
+}
+
+TEST(PasswordTest, SA_another_correct_password) {
+	Password my_password;
+	my_password.set("cccOrect");
+	bool result = my_password.authenticate("cccOrect");
+	ASSERT_EQ(true, result);
+}
+
+TEST(PasswordTest, SA_invalid_password) {
+	Password my_password;
+	my_password.set("0");
+	bool result = my_password.authenticate("0");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, SA_invalid_length_password) {
+	Password my_password;
+	my_password.set("777char");
+	bool result = my_password.authenticate("777Char");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, SA_invalid_leading_password) {
+	Password my_password;
+	my_password.set("8888char");
+	bool result = my_password.authenticate("8888Char");
+	ASSERT_EQ(false, result);
+}
+
+TEST(PasswordTest, SA_invalid_mixed_case_password) {
+	Password my_password;
+	my_password.set("notmixedcase");
+	bool result = my_password.authenticate("notmixedcase");
 	ASSERT_EQ(false, result);
 }
